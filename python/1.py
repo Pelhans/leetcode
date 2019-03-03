@@ -10,19 +10,10 @@ class Solution(object):
         """
         if len(nums) == 0:
             return None
-        hash_dict = {}
+        hash_dict = {nums[i]:i for i in range(len(nums))}
+        result = []
         for i in range(len(nums)):
-            if nums[i] in hash_dict:
-                hash_dict[nums[i]].append(i)
-            else:
-                hash_dict[nums[i]] = [i]
-        for i,j in enumerate(nums):
-            if target - j in hash_dict:
-                print target - j
-                if len(hash_dict[target-j]) == 1 and hash_dict[target-j] != [i]:
-                    return [i, hash_dict[target-j][0]]
-                elif len(hash_dict[target-j]) == 2:
-                    if hash_dict[target-j][0] == i:
-                        return [i, hash_dict[target-j][1]]
-                    else:
-                        return [i, hash_dict[target-j][0]]
+            gap = target - nums[i]
+            if gap in hash_dict and hash_dict[gap] > i:
+                result.extend([i, hash_dict[gap]])
+        return result
