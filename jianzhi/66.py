@@ -16,6 +16,5 @@ class Solution:
             C[i] = C[i-1]*A[i-1]
         for i in range(0, n-1)[::-1]:
             D[i] = D[i+1]*A[i+1]
-        for i in range(n):
-            B[i] = C[i]*D[i]
+        B = [C[i]*D[i] for i in range(len(A))]
         return B
